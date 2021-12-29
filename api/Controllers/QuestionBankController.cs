@@ -30,9 +30,8 @@ namespace api.Controllers
             return NoContent();
         }
         [HttpGet("{questionBankId:int}")]
-        public async Task<ActionResult<Object>> GetQuestionBank(int userId,int questionBankId){
-            var questionBank = context.Users.FirstOrDefault(x => x.Id == userId).QuestionBanks
-                                .FirstOrDefault(x => x.Id == questionBankId);
+        public async Task<ActionResult<Object>> GetQuestionBank(int questionBankId){
+            var questionBank = context.QuestionBanks.Where(x => x.Id == questionBankId);
             await context.SaveChangesAsync();
             return Ok(questionBank);
         }

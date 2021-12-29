@@ -14,5 +14,8 @@ namespace api.Entities
         public string OptionB { get; set; }
         public string OptionC { get; set; }
         public string OptionD { get; set; }
+        public QuestionBank QuestionBank { get; set; }
+        public int QuestionBankId { get; set; }
+
     }
 }
