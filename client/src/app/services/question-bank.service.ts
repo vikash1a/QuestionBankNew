@@ -13,9 +13,11 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
 
-const baseurl='http://localhost:5000/api/questionBank/';
-const baseurl_1='http://localhost:5000/api/question/';
+
+const baseurl=environment.baseUrl+'questionBank/';
+const baseurl_1=environment.baseUrl+'question/';
 
 @Injectable({
   providedIn: 'root'

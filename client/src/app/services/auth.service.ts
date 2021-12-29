@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 import 'rxjs/add/operator/do';
 
@@ -11,6 +12,7 @@ export class AuthService {
 
   token: string;
   userId :number;
+  baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) {
     if ('token' in window.sessionStorage) {
@@ -33,14 +35,14 @@ export class AuthService {
   login(email: string, password: string): Observable<any> {
     // password = md5(password);
     return this.http
-      .post('http://localhost:5000/api/account/login', { email, password })
+      .post(this.baseUrl+'account/login', { email, password })
       .do(data => {this.token = data['token'];this.userId = data['id']})
       .do(data => {window.sessionStorage.setItem('token', data['token']),window.sessionStorage.setItem('userId', data['id'])});
   }
   signup(firstname: string,lastname: string,email: string, password: string): Observable<any> {
     // password = md5(password);
     return this.http
-      .post('http://localhost:5000/api/account/register', {firstname,lastname, email, password });
+      .post(this.baseUrl+'account/register', {firstname,lastname, email, password });
       // .do(data => this.token = data['token'])
       // .do(data => window.sessionStorage.setItem('token', data['token']));
   }
