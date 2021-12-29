@@ -29,15 +29,15 @@ namespace api.Controllers
             await context.SaveChangesAsync();
             return NoContent();
         }
-        [HttpGet("{questionBankId:int}")]
-        public async Task<ActionResult<Object>> GetQuestionBank(int questionBankId){
-            var questionBank = context.QuestionBanks.Where(x => x.Id == questionBankId);
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Object>> GetQuestionBank(int id){
+            var questions = context.Questions.Where(x => x.QuestionBankId == id);
             await context.SaveChangesAsync();
-            return Ok(questionBank);
+            return Ok(questions);
         }
         [HttpGet]
-        public async Task<ActionResult<Object>> GetQuestionBanks(int userId){
-            var questionBanks = context.QuestionBanks.Where(x=> x.UserId == userId).ToList();
+        public async Task<ActionResult<Object>> GetQuestionBanks(int id){
+            var questionBanks = context.QuestionBanks.Where(x=> x.UserId == id).ToList();
             await context.SaveChangesAsync();
             return Ok(new  {
                 data = questionBanks,

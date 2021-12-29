@@ -18,7 +18,7 @@ namespace api.DTOs
     }
     public class CreateQuestionRequestDto
     {
-        public string QuesitonText { get; set; }
+        public string QuestionText { get; set; }
         public string Answer { get; set; }
         public string OptionA { get; set; }
         public string OptionB { get; set; }
@@ -28,7 +28,7 @@ namespace api.DTOs
     }
     public class UpdateQuestionRequestDto
     {
-        public string QuesitonText { get; set; }
+        public string QuestionText { get; set; }
         public string Answer { get; set; }
         public string OptionA { get; set; }
         public string OptionB { get; set; }

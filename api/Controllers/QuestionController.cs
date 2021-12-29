@@ -22,7 +22,7 @@ namespace api.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateQuestion(CreateQuestionRequestDto createQuestionRequestDto){
             var question = new Question(){
-                QuesitonText = createQuestionRequestDto.QuesitonText,
+                QuestionText = createQuestionRequestDto.QuestionText,
                 Answer = createQuestionRequestDto.Answer,
                 OptionA = createQuestionRequestDto.OptionA,
                 OptionB = createQuestionRequestDto.OptionB,
@@ -36,17 +36,13 @@ namespace api.Controllers
         }
         [HttpPost("{QuestionId:int}")]
         public async Task<ActionResult> UpdateQuestion(int questionId,UpdateQuestionRequestDto updateQuestionRequestDto){
-            var question = new Question(){
-                Id = questionId,
-                QuesitonText = updateQuestionRequestDto.QuesitonText,
-                Answer = updateQuestionRequestDto.Answer,
-                OptionA = updateQuestionRequestDto.OptionA,
-                OptionB = updateQuestionRequestDto.OptionB,
-                OptionC = updateQuestionRequestDto.OptionC,
-                OptionD = updateQuestionRequestDto.OptionD,
-                QuestionBankId = updateQuestionRequestDto.QuestionBankId
-            };
-            context.Questions.Add(question);
+            var question = context.Questions.Where(x => x.Id == questionId).FirstOrDefault();
+            question.QuestionText = updateQuestionRequestDto.QuestionText;
+            question.Answer = updateQuestionRequestDto.Answer;
+            question.OptionA = updateQuestionRequestDto.OptionA;
+            question.OptionB = updateQuestionRequestDto.OptionB;
+            question.OptionC = updateQuestionRequestDto.OptionC;
+            question.OptionD = updateQuestionRequestDto.OptionD;
             await context.SaveChangesAsync();
             return NoContent();
         }
